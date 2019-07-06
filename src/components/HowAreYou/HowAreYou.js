@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 
 import sadEmoji from "./../../assets/sad.png";
+import FixedButton from "../UIKit/FixedButton";
 
 const HowAreYou = () => {
   return (
@@ -43,15 +44,17 @@ const HowAreYou = () => {
               {props.errors.notes && (
                 <div id="feedback">{props.errors.notes}</div>
               )}
-              <Link
-                className="button is-primary is-large is-fullwidth mt-2"
-                to="/encourage-me"
-              >
-                I need a pep talk
-                <span className="icon is-large ml-1">
-                  <FontAwesomeIcon icon={faCamera} className="fas" />
-                </span>
-              </Link>
+              <FixedButton>
+                <Link
+                  className="button is-primary is-large is-fullwidth mt-2"
+                  to="/encourage-me"
+                >
+                  I need a pep talk
+                  <span className="icon is-large ml-1">
+                    <FontAwesomeIcon icon={faCamera} className="fas" />
+                  </span>
+                </Link>
+              </FixedButton>
             </form>
           )}
         />

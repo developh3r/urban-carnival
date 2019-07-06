@@ -1,8 +1,9 @@
 import React, { Fragment, Component } from "react";
 import axios from "axios";
+// import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { Container, Link as Button } from "react-floating-action-button";
-// import { Link } from "react-router-dom";
+import { Redirect } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
@@ -11,6 +12,7 @@ import VideoInput from "../EncourageMe/VideoInput";
 // import Speech from "./SpeechRecognition/Speech";
 
 import styles from "./encourageMe.module.scss";
+import FixedButton from "../UIKit/FixedButton";
 
 var SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -26,7 +28,8 @@ class EncourageMe extends Component {
       phrase: "",
       voiceInput: "",
       listening: false,
-      listenCount: 0
+      listenCount: 0,
+      redirect: false
     };
   }
 
@@ -75,12 +78,10 @@ class EncourageMe extends Component {
               if (previousState.listenCount < 2) {
                 return {
                   listenCount: previousState.listenCount + 1,
-                  message: "Feel it more, one more time!"
+                  message: "Feel it more, say it one more time!"
                 };
               } else {
-                return {
-                  message: "You are ready! You can do it!"
-                };
+                this.props.history.push(`/congrats`);
               }
             });
           } else {
@@ -144,6 +145,12 @@ class EncourageMe extends Component {
     };
   };
 
+  // renderRedirect = () => {
+  //   if (this.state.redirect) {
+  //     return <Redirect to="/congrats" />;
+  //   }
+  // };
+
   render() {
     return (
       <Fragment>
@@ -157,20 +164,24 @@ class EncourageMe extends Component {
           {this.state.phrase}
         </h1>
         <div className="has-text-centered">
-          <Fragment>
-            {/* <h1 className="subtitle has-text-white">{this.state.voiceInput}</h1> */}
-            <h1 className="subtitle has-text-white">{this.state.message}</h1>
-            <Container>
-              <Button
-                onClick={event => this.testSpeech(event)}
-                // disabled={this.state.listening}
-                // className={classNames("", {styles.recordButton: !!this.state.listening})}
-              >
-                <FontAwesomeIcon icon={faMicrophone} size="lg" />
-              </Button>
-            </Container>
-          </Fragment>
+          <h1 className="help has-text-white">{this.state.message}</h1>
         </div>
+        <FixedButton>
+          <button
+            className={classNames("button is-primary is-large", {
+              "is-active is-focused is-loading": this.state.listening
+            })}
+            onClick={event => this.testSpeech(event)}
+
+            // disabled={this.state.listening}
+            // className={classNames("", {styles.recordButton: !!this.state.listening})}
+          >
+            <FontAwesomeIcon icon={faMicrophone} size="lg" />
+          </button>
+          {/* <Link className="button is-light is-large" to="/how-are-you">
+            Back
+          </Link> */}
+        </FixedButton>
       </Fragment>
     );
   }

@@ -6,6 +6,7 @@ import TopBanner from "./TopBanner";
 import Logs from "./Logs/Logs";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import FixedButton from "../UIKit/FixedButton";
 
 const logs = [
   {
@@ -47,13 +48,13 @@ class Home extends Component {
             <Logs date={log.date} phrase={log.phrase} />
           ))}
         </div>
-        <Container>
+        <FixedButton>
           <Link to="/how-are-you">
-            <Button className="is-primary">
+            <button className="button is-primary is-large">
               <FontAwesomeIcon icon={faPlus} />
-            </Button>
+            </button>
           </Link>
-        </Container>
+        </FixedButton>
       </Fragment>
     );
   }

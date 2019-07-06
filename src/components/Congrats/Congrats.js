@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Confetti from "./Confetti";
 
 import kiss from "../../assets/kiss.png";
+import FixedButton from "../UIKit/FixedButton";
 
 const Congrats = () => {
   return (
@@ -19,9 +20,11 @@ const Congrats = () => {
           <img src={kiss} alt="Good Job!" />
         </div>
         <div className="hero-body" style={{ justifyContent: "center" }}>
-          <Link to="/" className="button is-primary">
-            View logs
-          </Link>
+          <FixedButton>
+            <Link to="/" className="button is-primary">
+              View logs
+            </Link>
+          </FixedButton>
         </div>
       </div>
     </div>
