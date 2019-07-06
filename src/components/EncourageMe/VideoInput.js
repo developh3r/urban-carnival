@@ -19,8 +19,10 @@ class VideoInput extends Component {
       faceMatcher: null,
       match: null,
       facingMode: null,
-      expressions: null,
-      message: null
+      expressions: [],
+      message: null,
+      currentExpression: null,
+      averageExpressions: []
     };
   }
 
@@ -30,9 +32,13 @@ class VideoInput extends Component {
     this.setInputDevice();
   };
 
+  componentWillUnmount() {
+    clearInterval(this.interval);
+  }
+
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
-      console.log(devices);
+      // console.log(devices);
       let inputDevice = await devices.filter(
         device => device.kind === "videoinput"
       );
@@ -52,12 +58,8 @@ class VideoInput extends Component {
   startCapture = () => {
     this.interval = setInterval(() => {
       this.capture();
-    }, 500);
+    }, 1500);
   };
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
 
   capture = async () => {
     if (!!this.webcam.current) {
@@ -70,23 +72,42 @@ class VideoInput extends Component {
               {
                 detections: fullDesc.map(fd => fd.detection),
                 descriptors: fullDesc.map(fd => fd.descriptor),
-                expressions: fullDesc[0].expressions
-                // message: "Some random encouragement message."
-              }
-              // console.table(fullDesc[0].expressions)
+                currentExpression: fullDesc[0].expressions
+              },
+              this.getExpressions
             )
           : this.setState({
               message:
-                "We cannot detect a face. Please make sure that your camera is working."
+                "We cannot detect your face. Please make sure that your camera is working."
             });
       });
+    }
+  };
 
-      //   if (!!this.state.descriptors && !!this.state.faceMatcher) {
-      //     let match = await this.state.descriptors.map(descriptor =>
-      //       this.state.faceMatcher.findBestMatch(descriptor)
-      //     );
-      //     this.setState({ match });
-      //   }
+  getExpressions = () => {
+    if (this.state.expressions !== "undefined") {
+      this.setState(previousState => {
+        let currentExpression;
+        let expressions;
+        let count = 0;
+
+        if (previousState.currentExpression !== "undefined") {
+          currentExpression = previousState.currentExpression;
+        }
+
+        if (previousState.expressions !== "undefined") {
+          expressions = previousState.expressions;
+        }
+
+        for (count = 0; expressions.length < 50; count++) {
+          expressions.push(currentExpression);
+          count++;
+        }
+
+        return {
+          expressions: expressions
+        };
+      });
     }
   };
 
