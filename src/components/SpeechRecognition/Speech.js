@@ -68,12 +68,12 @@ class Speech extends Component {
       this.setState({ listening: false });
     };
 
-    recognition.onerror = event => {
-      this.setState({
-        result: `We can't recognize your voice, please try again.`,
-        listening: false
-      });
-    };
+    // recognition.onerror = event => {
+    //   this.setState({
+    //     result: `We can't recognize your voice, please try again.`,
+    //     listening: false
+    //   });
+    // };
 
     recognition.onaudiostart = event => {
       //Fired when the user agent has started to capture audio.
