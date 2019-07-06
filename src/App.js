@@ -1,8 +1,10 @@
 import React, { Component } from "react";
-// import Recorder from "./components/SpeechRecognition/Recorder";
-import Speech from "./components/SpeechRecognition/Speech";
+import { Route, BrowserRouter } from "react-router-dom";
 
 import "./styles/global.scss";
+import Index from "./pages/Index";
+import VideoInput from "./views/VideoInput";
+import Speech from "./components/SpeechRecognition/Speech";
 
 class App extends Component {
   constructor(props) {
@@ -12,13 +14,13 @@ class App extends Component {
 
   render() {
     return (
-      <section className="hero is-primary has-text-centered">
-        <div className="hero-body">
-          <h3 className="title">Speech-to-text</h3>
-          {/* <Recorder /> */}
-          <Speech />
+      <BrowserRouter>
+        <div className="route">
+          <Route exact path="/" component={Index} />
+          <Route exact path="/speech" component={Speech} />
+          <Route exact path="/camera" component={VideoInput} />
         </div>
-      </section>
+      </BrowserRouter>
     );
   }
 }
