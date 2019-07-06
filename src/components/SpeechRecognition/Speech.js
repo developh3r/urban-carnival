@@ -23,6 +23,7 @@ class Speech extends Component {
     super(props);
     this.state = {
       phrase: "hello",
+      result: "",
       listening: false
     };
   }
@@ -57,6 +58,9 @@ class Speech extends Component {
     recognition.onresult = event => {
       var speechResult = event.results[0][0].transcript.toLowerCase();
       console.log(speechResult);
+      this.setState({
+        result: speechResult
+      });
     };
 
     recognition.onspeechend = () => {
@@ -65,7 +69,10 @@ class Speech extends Component {
     };
 
     recognition.onerror = event => {
-      console.log(`Error occured: ${event.error}`);
+      this.setState({
+        result: `We can't recognize your voice, please try again.`,
+        listening: false
+      });
     };
 
     recognition.onaudiostart = event => {
@@ -111,7 +118,8 @@ class Speech extends Component {
   render() {
     return (
       <Fragment>
-        <h1 className="title">{this.state.phrase}</h1>
+        {/* <h1 className="title">{this.state.phrase}</h1> */}
+        <h1 className="subtitle">{this.state.result}</h1>
         <button
           className="button"
           onClick={event => this.testSpeech(event)}
