@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat:400,700,900&display=swap');
+
 // Initial font variable
 $family-sans-serif: "Lato", sans-serif;
 
@@ -21,3 +23,6 @@ $primary: $purple;
 
 $body-color: $white;
 $spacer: .5rem;
+
+$family-primary: $family-sans-serif;
+$family-secondary: 'Montserrat', sans-serif;

@@ -64,6 +64,11 @@ input:focus {
     // padding-bottom
     padding-bottom: $spacer * $i !important;
   }
+
+  h#{$i} {
+    font-family: $family-secondary;
+    font-weight: 700
+  }
 }
 
 .app {
@@ -71,4 +76,11 @@ input:focus {
   background: linear-gradient($purple, $pink);
   height: 100vh;
   color: $white;
+  // clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 0% 80%);
+}
+
+.button, .label, title {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  color: $white
 }
