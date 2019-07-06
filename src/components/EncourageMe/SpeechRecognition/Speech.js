@@ -1,5 +1,9 @@
 import React, { Component, Fragment } from "react";
+import classNames from "classnames";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 
+import styles from "../encourageMe.module.scss";
 var SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
 var SpeechGrammarList =
@@ -7,31 +11,19 @@ var SpeechGrammarList =
 // var SpeechRecognitionEvent =
 //   window.SpeechRecognitionEvent || window.webkitSpeechRecognitionEvent;
 
-var phrases = [
-  "I love to sing because it's fun",
-  "where are you going",
-  "can I call you tomorrow",
-  "why did you talk while I was talking",
-  "she enjoys reading books and playing games",
-  "where are you going",
-  "have a great day",
-  "she sells seashells on the seashore"
-];
-
 class Speech extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      phrase: "hello",
-      result: "",
+      phrase: "",
+      voiceInput: "",
       listening: false
     };
   }
 
   componentDidMount() {
-    var selectedPhrase = Math.floor(Math.random() * phrases.length);
     this.setState({
-      phrase: phrases[selectedPhrase]
+      phrase: this.props.phrase.toLowerCase().slice(0, -1)
     });
   }
 
@@ -57,10 +49,22 @@ class Speech extends Component {
     recognition.start();
     recognition.onresult = event => {
       var speechResult = event.results[0][0].transcript.toLowerCase();
-      console.log(speechResult);
-      this.setState({
-        result: speechResult
-      });
+      this.setState(
+        {
+          voiceInput: speechResult
+        },
+        () => {
+          if (this.state.voiceInput === this.state.phrase) {
+            return this.setState({
+              message: "ang galing ko"
+            });
+          } else {
+            this.setState({
+              message: "Repeat again"
+            });
+          }
+        }
+      );
     };
 
     recognition.onspeechend = () => {
@@ -118,14 +122,17 @@ class Speech extends Component {
   render() {
     return (
       <Fragment>
-        {/* <h1 className="title">{this.state.phrase}</h1> */}
-        <h1 className="subtitle">{this.state.result}</h1>
+        <h1 className="subtitle has-text-white">{this.state.voiceInput}</h1>
+        {/* <h1 className="subtitle has-text-white">{this.state.message}</h1> */}
         <button
-          className="button"
+          className={classNames(
+            "button is-primary is-large",
+            styles.recordButton
+          )}
           onClick={event => this.testSpeech(event)}
           disabled={this.state.listening}
         >
-          Listen
+          <FontAwesomeIcon icon={faMicrophone} size="lg" />
         </button>
       </Fragment>
     );
