@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 import { Formik, Field, Form, ErrorMessage } from "formik";
+import styles from "./login.module.scss";
+import classNames from "classnames";
 
 const Login = () => {
   return (
@@ -45,25 +47,40 @@ const Login = () => {
             }) => (
               <Form>
                 <div className="field mt-2">
-                  <label className="label">Name</label>
+                  <label className={classNames("label", styles.label)}>
+                    Name
+                  </label>
                   <div className="control">
-                    <Field className="input" name="name" />
+                    <Field
+                      className={classNames("input", styles.input)}
+                      name="name"
+                    />
                   </div>
                 </div>
                 <ErrorMessage name="email" component="div" />
                 <div className="field mt-2">
-                  <label className="label">Email</label>
+                  <label className={classNames("label", styles.label)}>
+                    Email
+                  </label>
                   <div className="control">
-                    <Field className="input" name="email" />
+                    <Field
+                      className={classNames("input", styles.input)}
+                      name="email"
+                    />
                   </div>
                 </div>
                 <ErrorMessage name="email">
                   {errorMessage => <div className="error">{errorMessage}</div>}
                 </ErrorMessage>
                 <div className="field mt-2">
-                  <label className="label">Password</label>
+                  <label className={classNames("label", styles.label)}>
+                    Password
+                  </label>
                   <div className="control">
-                    <Field className="input" name="password" />
+                    <Field
+                      className={classNames("input", styles.input)}
+                      name="password"
+                    />
                   </div>
                 </div>
                 <ErrorMessage

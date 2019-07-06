@@ -1,6 +1,10 @@
 @import "./variables";
 @import "bulma";
 
+input:focus {
+  outline: none !important
+}
+
 // custom margin & padding
 // "m-0" --> no margin; "p-0" --> no padding
 // "m-1" --> smallest margin
