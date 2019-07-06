@@ -4,7 +4,7 @@ import Webcam from "react-webcam";
 import { loadModels, getFullFaceDescription } from "../../api/face";
 import styles from "./encourageMe.module.scss";
 
-const WIDTH = 420;
+const WIDTH = 400;
 const HEIGHT = 420;
 const inputSize = 160;
 
@@ -114,7 +114,7 @@ class VideoInput extends Component {
   render() {
     const { detections, match, facingMode } = this.state;
     let videoConstraints = null;
-    let camera = "";
+    let camera;
     if (!!facingMode) {
       videoConstraints = {
         width: WIDTH,
@@ -148,7 +148,7 @@ class VideoInput extends Component {
               }}
             >
               {!!match && !!match[i] ? (
-                <p
+                <h3
                   style={{
                     backgroundColor: "blue",
                     border: "solid",
@@ -158,9 +158,10 @@ class VideoInput extends Component {
                     color: "#fff",
                     transform: `translate(-3px,${_H}px)`
                   }}
+                  // className="has-text-centered is-size-4"
                 >
                   {match[i]._label}
-                </p>
+                </h3>
               ) : null}
             </div>
           </div>
@@ -177,6 +178,9 @@ class VideoInput extends Component {
               height: HEIGHT
             }}
           >
+            <p className="help has-text-centered subtitle has-text-white">
+              {this.state.message}
+            </p>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
                 <div style={{ position: "absolute", padding: "20px" }}>
@@ -194,9 +198,6 @@ class VideoInput extends Component {
             </div>
           </div>
         </div>
-        <p className="help has-text-left subtitle has-text-white">
-          {this.state.message}
-        </p>
       </Fragment>
     );
   }

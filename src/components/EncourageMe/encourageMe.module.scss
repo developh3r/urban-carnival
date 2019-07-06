@@ -5,5 +5,7 @@
 }
 
 .recordButton {
-  border-radius: 27px;
+  -webkit-box-shadow: 10px 10px 62px 0px rgba(255,255,255,1);
+  -moz-box-shadow: 10px 10px 62px 0px rgba(255,255,255,1);
+  box-shadow: 10px 10px 62px 0px rgba(255,255,255,1);
 }

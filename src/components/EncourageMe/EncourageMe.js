@@ -1,6 +1,9 @@
 import React, { Fragment, Component } from "react";
 import axios from "axios";
 import classNames from "classnames";
+import { Container, Link as Button } from "react-floating-action-button";
+// import { Link } from "react-router-dom";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 
@@ -144,29 +147,28 @@ class EncourageMe extends Component {
   render() {
     return (
       <Fragment>
-        <h1 className="subtitle has-text-white has-text-centered">
-          Hi Name, let's do this!
-        </h1>
+        <h1 className="is-size-4 has-text-centered">Hi Caye, let's do this!</h1>
         <VideoInput />
 
-        <p className="has-text-white">Look yourself in the eye and say,</p>
-        <h1 className="subtitle has-text-white has-text-weigh-bold">
+        <p className="has-text-centered has-text-white mt-3">
+          Look yourself in the eye and say,
+        </p>
+        <h1 className="is-size-3 has-text-white has-text-weigh-bold has-text-centered">
           {this.state.phrase}
         </h1>
         <div className="has-text-centered">
           <Fragment>
             {/* <h1 className="subtitle has-text-white">{this.state.voiceInput}</h1> */}
             <h1 className="subtitle has-text-white">{this.state.message}</h1>
-            <button
-              className={classNames(
-                "button is-primary is-large",
-                styles.recordButton
-              )}
-              onClick={event => this.testSpeech(event)}
-              disabled={this.state.listening}
-            >
-              <FontAwesomeIcon icon={faMicrophone} size="lg" />
-            </button>
+            <Container>
+              <Button
+                onClick={event => this.testSpeech(event)}
+                // disabled={this.state.listening}
+                // className={classNames("", {styles.recordButton: !!this.state.listening})}
+              >
+                <FontAwesomeIcon icon={faMicrophone} size="lg" />
+              </Button>
+            </Container>
           </Fragment>
         </div>
       </Fragment>

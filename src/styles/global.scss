@@ -1,8 +1,9 @@
 @import "./variables";
+@import "../../node_modules/react-fab/dist/main.scss";
 @import "bulma";
 
 input:focus {
-  outline: none !important
+  outline: none !important;
 }
 
 // custom margin & padding
@@ -67,7 +68,7 @@ input:focus {
 
   h#{$i} {
     font-family: $family-secondary;
-    font-weight: 700
+    font-weight: 700;
   }
 }
 
@@ -79,8 +80,10 @@ input:focus {
   // clip-path: polygon(0% 0%, 100% 0%, 100% 40%, 0% 80%);
 }
 
-.button, .label, title {
-  font-family: 'Montserrat', sans-serif;
+.button,
+.label,
+title {
+  font-family: "Montserrat", sans-serif;
   font-weight: 700;
-  color: $white
+  color: $white;
 }
