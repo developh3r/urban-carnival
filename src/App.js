@@ -10,6 +10,7 @@ import Camera from "./components/Camera/Camera";
 import Congrats from "./components/Camera/Congrats";
 import Home from "./components/Home/Home";
 import HowAreYou from "./components/HowAreYou/HowAreYou";
+import Layout from "./components/Layout";
 
 class App extends Component {
   constructor(props) {
@@ -19,7 +20,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="app-background p-5">
+      <Layout>
         <Router>
           <Switch>
             <Route exact path="/" component={Home} />
@@ -30,7 +31,7 @@ class App extends Component {
             <Route path="/how-are-you" component={HowAreYou} />
           </Switch>
         </Router>
-      </div>
+      </Layout>
     );
   }
 }
