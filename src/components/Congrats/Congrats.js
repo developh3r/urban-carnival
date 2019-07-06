@@ -21,7 +21,7 @@ const Congrats = () => {
         </div>
         <div className="hero-body" style={{ justifyContent: "center" }}>
           <FixedButton>
-            <Link to="/" className="button is-primary">
+            <Link to="/" className="button is-primary is-large">
               View logs
             </Link>
           </FixedButton>
