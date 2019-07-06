@@ -5,7 +5,7 @@ import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
 
 import Login from "./components/Login/Login";
 import Welcome from "./components/Login/Welcome";
-import Congrats from "./components/Camera/Congrats";
+import Congrats from "./components/Congrats/Congrats";
 import Home from "./components/Home/Home";
 import HowAreYou from "./components/HowAreYou/HowAreYou";
 import Layout from "./components/Layout";
