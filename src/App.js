@@ -1,8 +1,15 @@
-import React, { Component } from "react";
+import React, { Fragment, Component } from "react";
 // import Recorder from "./components/SpeechRecognition/Recorder";
 import Speech from "./components/SpeechRecognition/Speech";
+import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
 
 import "./styles/global.scss";
+import Login from "./components/Login/Login";
+import Welcome from "./components/Login/Welcome";
+import Camera from "./components/Camera/Camera";
+import Congrats from "./components/Camera/Congrats";
+import Home from "./components/Home/Home";
+import HowAreYou from "./components/HowAreYou/HowAreYou";
 
 class App extends Component {
   constructor(props) {
@@ -12,13 +19,24 @@ class App extends Component {
 
   render() {
     return (
-      <section className="hero is-primary has-text-centered">
-        <div className="hero-body">
-          <h3 className="title">Speech-to-text</h3>
-          {/* <Recorder /> */}
-          <Speech />
-        </div>
-      </section>
+      <Router>
+        <section className="hero is-primary has-text-centered">
+          <div className="hero-body">
+            <h3 className="title">Speech-to-text</h3>
+            <Link to="/login">Log in!</Link>
+            <Link to="/welcome">Welcome!</Link>
+            <Speech />
+          </div>
+        </section>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/login" component={Login} />
+          <Route path="/welcome" component={Welcome} />
+          <Route path="/encourage-me" component={Camera} />
+          <Route path="/congrats" component={Congrats} />
+          <Route path="/how-are-you" component={HowAreYou} />
+        </Switch>
+      </Router>
     );
   }
 }
