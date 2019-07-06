@@ -6,13 +6,15 @@ import { Formik, Field, Form, ErrorMessage } from "formik";
 import styles from "./login.module.scss";
 import classNames from "classnames";
 import image from "./../../assets/mirror.png";
+import Modal from "../UIKit/Modal";
 
 class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
       isNewAccount: true,
-      isActiveModal: false
+      isActiveModal: false,
+      isLoggedIn: false
     };
   }
 
@@ -35,6 +37,7 @@ class Login extends Component {
     return (
       <Fragment>
         {/* <div className="logo pt-5">H</div> */}
+        {!!this.state.isLoggedIn && <Modal />}
         <div className="columns is-mobile pt-5 mt-5">
           <div className="column">
             <p>WELCOME TO</p>
@@ -101,7 +104,8 @@ class Login extends Component {
                     //   msg: "Set some arbitrary status or data"
                     // });
                     console.log(error);
-                  }
+                  },
+                  this.setState({ isLoggedIn: true })
                 );
                 // .error(error =>
                 //   console.log("Yikes, we got an error: ", error)

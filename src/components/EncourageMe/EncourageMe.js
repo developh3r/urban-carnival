@@ -1,6 +1,6 @@
 import React, { Fragment, Component } from "react";
 import axios from "axios";
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import classNames from "classnames";
 import { Container, Link as Button } from "react-floating-action-button";
 import { Redirect } from "react-router-dom";
@@ -74,12 +74,26 @@ class EncourageMe extends Component {
         },
         () => {
           if (this.state.voiceInput === this.state.purePhrase) {
+            console.log(this.state.listenCount);
             return this.setState(previousState => {
               if (previousState.listenCount < 2) {
-                return {
-                  listenCount: previousState.listenCount + 1,
-                  message: "Feel it more, say it one more time!"
-                };
+                switch (previousState.listenCount) {
+                  case 0:
+                    return {
+                      listenCount: previousState.listenCount + 1,
+                      message: "That's the spirit. Say it again!"
+                    };
+                  case 1:
+                    return {
+                      listenCount: previousState.listenCount + 1,
+                      message: "Feel it more, say it one last time!"
+                    };
+                  default:
+                    return {
+                      listenCount: previousState.listenCount + 1,
+                      message: "Repetition is key. Let's say it again!"
+                    };
+                }
               } else {
                 this.props.history.push(`/congrats`);
               }
@@ -158,29 +172,43 @@ class EncourageMe extends Component {
         <VideoInput />
 
         <p className="has-text-centered has-text-white mt-3">
-          Look yourself in the eye and say,
+          Look yourself in the eye and say this out loud:
         </p>
-        <h1 className="is-size-3 has-text-white has-text-weigh-bold has-text-centered">
+        <h1 className="is-size-3 has-text-white has-text-weight-bold has-text-centered">
           {this.state.phrase}
         </h1>
         <div className="has-text-centered">
           <h1 className="help has-text-white">{this.state.message}</h1>
         </div>
-        <FixedButton>
-          <button
-            className={classNames("button is-primary is-large", {
-              "is-active is-focused is-loading": this.state.listening
-            })}
-            onClick={event => this.testSpeech(event)}
 
-            // disabled={this.state.listening}
-            // className={classNames("", {styles.recordButton: !!this.state.listening})}
-          >
-            <FontAwesomeIcon icon={faMicrophone} size="lg" />
-          </button>
-          {/* <Link className="button is-light is-large" to="/how-are-you">
-            Back
-          </Link> */}
+        <FixedButton>
+          <div className="columns">
+            <div className="column p-1">
+              <button
+                className={classNames("button is-primary is-large", {
+                  "is-active is-focused is-loading": this.state.listening
+                })}
+                onClick={event => this.testSpeech(event)}
+
+                // disabled={this.state.listening}
+                // className={classNames("", {styles.recordButton: !!this.state.listening})}
+              >
+                Tap to speak
+                <FontAwesomeIcon
+                  icon={faMicrophone}
+                  size="lg"
+                  className="ml-3"
+                />
+              </button>
+            </div>
+            <div className="column p-1">
+              <Link to="/home">
+                <button className="button is-info is-danger is-fullwidth">
+                  Go back
+                </button>
+              </Link>
+            </div>
+          </div>
         </FixedButton>
       </Fragment>
     );

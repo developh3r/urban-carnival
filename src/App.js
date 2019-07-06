@@ -1,7 +1,12 @@
 import React, { Component } from "react";
 // import Recorder from "./components/SpeechRecognition/Recorder";
 // import Speech from "./components/SpeechRecognition/Speech";
-import { Switch, BrowserRouter as Router, Route } from "react-router-dom";
+import {
+  Switch,
+  BrowserRouter as Router,
+  Route,
+  Redirect
+} from "react-router-dom";
 
 import Login from "./components/Login/Login";
 import Welcome from "./components/Login/Welcome";
@@ -24,12 +29,13 @@ class App extends Component {
       <Layout>
         <Router>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/home" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/welcome" component={Welcome} />
             <Route path="/encourage-me" component={EncourageMe} />
             <Route path="/congrats" component={Congrats} />
             <Route path="/how-are-you" component={HowAreYou} />
+            <Redirect to="/login" />
           </Switch>
         </Router>
       </Layout>

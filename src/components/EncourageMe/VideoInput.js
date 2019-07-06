@@ -5,7 +5,7 @@ import { loadModels, getFullFaceDescription } from "../../api/face";
 import styles from "./encourageMe.module.scss";
 
 const WIDTH = 400;
-const HEIGHT = 420;
+const HEIGHT = 350;
 const inputSize = 160;
 
 class VideoInput extends Component {
@@ -178,12 +178,12 @@ class VideoInput extends Component {
               height: HEIGHT
             }}
           >
-            <p className="help has-text-centered subtitle has-text-white">
+            <p className="help has-text-centered has-text-white">
               {this.state.message}
             </p>
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
-                <div style={{ position: "absolute", padding: "20px" }}>
+                <div style={{ position: "absolute", padding: "15px" }}>
                   <Webcam
                     audio={false}
                     width={WIDTH}

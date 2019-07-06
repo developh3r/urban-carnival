@@ -12,7 +12,7 @@ import FixedButton from "../UIKit/FixedButton";
 const HowAreYou = () => {
   return (
     <Fragment>
-      <div className="hero mt-5 pt-5 has-text-centered">
+      <div className="hero mt-5 pt-2 has-text-centered">
         <div className="level">
           <div className="level-item has-text-centered">
             <figure class="image is-128x128 is-inline-block">
@@ -39,21 +39,32 @@ const HowAreYou = () => {
                 onBlur={props.handleBlur}
                 value={props.values.notes}
                 name="notes"
-                className="textarea my-3"
+                className="textarea my-2"
               />
               {props.errors.notes && (
                 <div id="feedback">{props.errors.notes}</div>
               )}
               <FixedButton>
-                <Link
-                  className="button is-primary is-large is-fullwidth mt-2"
-                  to="/encourage-me"
-                >
-                  I need a pep talk
-                  <span className="icon is-large ml-1">
-                    <FontAwesomeIcon icon={faCamera} className="fas" />
-                  </span>
-                </Link>
+                <div className="columns">
+                  <div className="column p-1">
+                    <Link
+                      className="button is-primary is-large is-fullwidth mt-2"
+                      to="/encourage-me"
+                    >
+                      I need a pep talk
+                      <span className="icon is-large ml-1">
+                        <FontAwesomeIcon icon={faCamera} className="fas" />
+                      </span>
+                    </Link>
+                  </div>
+                  <div className="column p-1">
+                    <Link to="/home">
+                      <button className="button is-info is-danger is-fullwidth">
+                        Go back
+                      </button>
+                    </Link>
+                  </div>
+                </div>
               </FixedButton>
             </form>
           )}

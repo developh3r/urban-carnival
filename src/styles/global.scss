@@ -1,5 +1,5 @@
 @import "./variables";
-@import "../../node_modules/react-fab/dist/main.scss";
+// @import "../../node_modules/react-fab/dist/main.scss";
 @import "bulma";
 
 input:focus {
@@ -89,5 +89,9 @@ title {
 }
 
 button.is-active {
-  background-color: $red !important;
+  background-color: $blue !important;
+}
+
+.modal {
+  height: 100vh
 }

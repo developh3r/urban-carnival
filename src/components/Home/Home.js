@@ -49,11 +49,23 @@ class Home extends Component {
           ))}
         </div>
         <FixedButton>
-          <Link to="/how-are-you">
-            <button className="button is-primary is-large">
-              <FontAwesomeIcon icon={faPlus} />
-            </button>
-          </Link>
+          <div className="columns">
+            <div className="column p-1">
+              <Link to="/how-are-you">
+                <button className="button is-primary is-large is-fullwidth">
+                  <FontAwesomeIcon icon={faPlus} className="mr-2" />
+                  Encourage me
+                </button>
+              </Link>
+            </div>
+            <div className="column p-1">
+              <Link to="/login">
+                <button className="button is-info is-danger is-fullwidth">
+                  Sign out
+                </button>
+              </Link>
+            </div>
+          </div>
         </FixedButton>
       </Fragment>
     );
