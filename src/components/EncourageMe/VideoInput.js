@@ -1,11 +1,8 @@
 import React, { Component, Fragment } from "react";
 import { withRouter } from "react-router-dom";
 import Webcam from "react-webcam";
-// import { Camera } from "react-cam";
 import { loadModels, getFullFaceDescription } from "../../api/face";
-
-// Import face profile
-// const JSON_PROFILE = require("../descriptors/bnk48.json");
+import styles from "./encourageMe.module.scss";
 
 const WIDTH = 420;
 const HEIGHT = 420;
@@ -29,7 +26,7 @@ class VideoInput extends Component {
 
   componentWillMount = async () => {
     await loadModels();
-    this.setState({ message: "Loading models..." });
+    this.setState({ message: "Smile! You look beautiful when you do!" });
     this.setInputDevice();
   };
 
@@ -73,10 +70,10 @@ class VideoInput extends Component {
               {
                 detections: fullDesc.map(fd => fd.detection),
                 descriptors: fullDesc.map(fd => fd.descriptor),
-                expressions: fullDesc[0].expressions,
-                message: "Some random encouragement message."
-              },
-              console.table(fullDesc[0].expressions)
+                expressions: fullDesc[0].expressions
+                // message: "Some random encouragement message."
+              }
+              // console.table(fullDesc[0].expressions)
             )
           : this.setState({
               message:
@@ -123,7 +120,7 @@ class VideoInput extends Component {
               style={{
                 position: "absolute",
                 border: "solid",
-                borderColor: "blue",
+                borderColor: "#2a307c",
                 height: _H,
                 width: _W,
                 transform: `translate(${_X}px,${_Y}px)`
@@ -152,14 +149,7 @@ class VideoInput extends Component {
 
     return (
       <Fragment>
-        <div
-          className="Camera"
-          style={{
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center"
-          }}
-        >
+        <div className={styles.videoContainer}>
           <div
             style={{
               width: WIDTH,
@@ -168,7 +158,7 @@ class VideoInput extends Component {
           >
             <div style={{ position: "relative", width: WIDTH }}>
               {!!videoConstraints ? (
-                <div style={{ position: "absolute" }}>
+                <div style={{ position: "absolute", padding: "20px" }}>
                   <Webcam
                     audio={false}
                     width={WIDTH}
@@ -183,7 +173,7 @@ class VideoInput extends Component {
             </div>
           </div>
         </div>
-        <p className="has-text-centered subtitle has-text-white">
+        <p className="help has-text-left subtitle has-text-white">
           {this.state.message}
         </p>
       </Fragment>
