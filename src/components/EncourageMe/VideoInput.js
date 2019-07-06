@@ -46,10 +46,6 @@ class VideoInput extends Component {
         await this.setState({
           facingMode: "user"
         });
-      } else {
-        await this.setState({
-          facingMode: { exact: "environment" }
-        });
       }
       this.startCapture();
     });
