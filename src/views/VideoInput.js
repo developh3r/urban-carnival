@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import Webcam from "react-webcam";
+// import { Camera } from "react-cam";
 import { loadModels, getFullFaceDescription } from "../api/face";
 
 // Import face profile
@@ -20,7 +21,8 @@ class VideoInput extends Component {
       descriptors: null,
       faceMatcher: null,
       match: null,
-      facingMode: null
+      facingMode: null,
+      expressions: null
     };
   }
 
@@ -32,6 +34,7 @@ class VideoInput extends Component {
 
   setInputDevice = () => {
     navigator.mediaDevices.enumerateDevices().then(async devices => {
+      console.log(devices);
       let inputDevice = await devices.filter(
         device => device.kind === "videoinput"
       );
@@ -51,7 +54,7 @@ class VideoInput extends Component {
   startCapture = () => {
     this.interval = setInterval(() => {
       this.capture();
-    }, 6000);
+    }, 3000);
   };
 
   componentWillUnmount() {
@@ -64,13 +67,16 @@ class VideoInput extends Component {
         this.webcam.current.getScreenshot(),
         inputSize
       ).then(fullDesc => {
-        console.table(fullDesc[0].expressions);
-        // if (!!fullDesc) {
-        //   this.setState({
-        //     detections: fullDesc.map(fd => fd.detection),
-        //     descriptors: fullDesc.map(fd => fd.descriptor)
-        //   });
-        // }
+        fullDesc !== "undefined"
+          ? this.setState(
+              {
+                detections: fullDesc.map(fd => fd.detection),
+                descriptors: fullDesc.map(fd => fd.descriptor),
+                expressions: fullDesc[0].expressions
+              },
+              console.table(fullDesc[0].expressions)
+            )
+          : console.log("no face");
       });
 
       //   if (!!this.state.descriptors && !!this.state.faceMatcher) {
@@ -166,10 +172,20 @@ class VideoInput extends Component {
                   screenshotFormat="image/jpeg"
                   videoConstraints={videoConstraints}
                 />
+                {/* <Camera
+                  showFocus={false} //show/hide focus box, basically useless...
+                  front={false} // true: front camera, false: rear camera
+                  //   capture={this.capture}
+                  width={1920}
+                  height={1440}
+                  btnColor="#000"
+                  ref={this.webcam}
+                /> */}
               </div>
             ) : null}
             {!!drawBox ? drawBox : null}
           </div>
+          {/* <p>{this.state.detections}</p> */}
         </div>
       </div>
     );
