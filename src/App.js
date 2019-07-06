@@ -3,7 +3,6 @@ import React, { Component } from "react";
 // import Speech from "./components/SpeechRecognition/Speech";
 import { Switch, BrowserRouter as Router, Route, Link } from "react-router-dom";
 
-import "./styles/global.scss";
 import Login from "./components/Login/Login";
 import Welcome from "./components/Login/Welcome";
 import VideoInput from "./views/VideoInput";
