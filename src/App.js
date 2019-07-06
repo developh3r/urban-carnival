@@ -19,24 +19,18 @@ class App extends Component {
 
   render() {
     return (
-      <Router>
-        <section className="hero is-primary has-text-centered">
-          <div className="hero-body">
-            <h3 className="title">Speech-to-text</h3>
-            <Link to="/login">Log in!</Link>
-            <Link to="/welcome">Welcome!</Link>
-            <Speech />
-          </div>
-        </section>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/login" component={Login} />
-          <Route path="/welcome" component={Welcome} />
-          <Route path="/encourage-me" component={Camera} />
-          <Route path="/congrats" component={Congrats} />
-          <Route path="/how-are-you" component={HowAreYou} />
-        </Switch>
-      </Router>
+      <div className="app-background p-5">
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route path="/login" component={Login} />
+            <Route path="/welcome" component={Welcome} />
+            <Route path="/encourage-me" component={Camera} />
+            <Route path="/congrats" component={Congrats} />
+            <Route path="/how-are-you" component={HowAreYou} />
+          </Switch>
+        </Router>
+      </div>
     );
   }
 }
