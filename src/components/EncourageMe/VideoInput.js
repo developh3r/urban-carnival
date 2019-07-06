@@ -18,7 +18,7 @@ class VideoInput extends Component {
       descriptors: null,
       faceMatcher: null,
       match: null,
-      facingMode: null,
+      facingMode: "user",
       expressions: [],
       message: null,
       currentExpression: null,
@@ -121,11 +121,6 @@ class VideoInput extends Component {
         height: HEIGHT,
         facingMode: facingMode
       };
-      if (facingMode === "user") {
-        camera = "Front";
-      } else {
-        camera = "Back";
-      }
     }
 
     let drawBox = null;
