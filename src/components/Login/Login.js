@@ -1,16 +1,38 @@
-import React, { Fragment, useState, useEffect } from "react";
-import { Transition } from "react-transition-group";
+import React, { Fragment, Component } from "react";
+import axios from "axios";
+// import { Transition } from "react-transition-group";
 import { Link } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import styles from "./login.module.scss";
 import classNames from "classnames";
 import image from "./../../assets/mirror.png";
 
-const Login = () => {
-  const [isNewAccount, setIsNewAccount] = useState(true);
+class Login extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      isNewAccount: true,
+      isActiveModal: false
+    };
+  }
 
-  return (
-    <Transition>
+  // handleSubmit = ({ values }) => {
+  //   console.log("You tried posting!");
+  //   console.log(values);
+  //   return axios({
+  //     method: `post`,
+  //     url: `https://mirrorbackend.milkylorejo.com/save_signup.php`,
+  //     config: { headers: { "Content-Type": "application/json" } },
+  //     data: {
+  //       values
+  //     }
+  //   })
+  //     .then(response => console.log("Success!", response))
+  //     .catch(error => console.log("Yikes, here's your error: ", error));
+  // };
+
+  render() {
+    return (
       <Fragment>
         {/* <div className="logo pt-5">H</div> */}
         <div className="columns is-mobile pt-5 mt-5">
@@ -28,22 +50,62 @@ const Login = () => {
             <Formik
               // initialValues={user /** { email, social } */}
               onSubmit={(values, actions) => {
-                // MyImaginaryRestApiCall(user.id, values).then(
-                //   updatedUser => {
-                //     actions.setSubmitting(false);
-                //     updateUser(updatedUser);
-                //     onClose();
+                const data = {
+                  name: values.name,
+                  email: values.email,
+                  password: values.password
+                };
+                console.log("You clicked submit. Here's the data: ", data);
+                // axios
+                // .post(
+                //   "https://mirrorbackend.milkylorejo.com/save_signup.php",
+                //   {
+                //     data
                 //   },
-                //   error => {
-                //     actions.setSubmitting(false);
-                //     actions.setErrors(transformMyRestApiErrorsToAnObject(error));
-                //     actions.setStatus({
-                //       msg: "Set some arbitrary status or data"
-                //     });
+                //   {
+                //     headers: {
+                //       "Content-Type": "application/json"
+                //     },
+                //     mode: "no-cors"
                 //   }
+                // )
+                axios({
+                  method: "post",
+                  url: "https://mirrorbackend.milkylorejo.com/save_signup.php",
+                  data,
+                  headers: {
+                    "Content-Type":
+                      "application/x-www-form-urlencoded; charset=UTF-8"
+                  }
+                  // data: {
+                  //   name: values.name,
+                  //   email: values.email,
+                  //   password: values.password
+                  // }
+                }).then(
+                  response => {
+                    console.log(
+                      "Congrats! Here's the response data: ",
+                      response
+                    );
+                    actions.setSubmitting(false);
+                  },
+                  updatedUser => {
+                    actions.setSubmitting(false);
+                    // updateUser(updatedUser);
+                    // onClose();
+                  },
+                  error => {
+                    actions.setSubmitting(false);
+                    // actions.setStatus({
+                    //   msg: "Set some arbitrary status or data"
+                    // });
+                    console.log(error);
+                  }
+                );
+                // .error(error =>
+                //   console.log("Yikes, we got an error: ", error)
                 // );
-                console.log("You clicked submit. Here are the values:");
-                console.log(values);
                 // setIsNewAccount(true);
               }}
               render={({
@@ -57,7 +119,7 @@ const Login = () => {
                 isSubmitting
               }) => (
                 <Form>
-                  {!!isNewAccount && (
+                  {!!this.state.isNewAccount && (
                     <div className="field mt-2">
                       <label className={classNames("label", styles.label)}>
                         Name
@@ -110,29 +172,33 @@ const Login = () => {
                     className="button is-primary mt-4 is-fullwidth is-large"
                     disabled={isSubmitting}
                   >
-                    {!!isNewAccount ? "SIGN UP" : "LOG IN"}
+                    {!!this.state.isNewAccount ? "SIGN UP" : "LOG IN"}
                   </button>
                 </Form>
               )}
             />
             <p className="mt-1 has-text-centered">
-              {!!isNewAccount ? (
+              {!!this.state.isNewAccount ? (
                 <Fragment>
                   Already have an account?{" "}
-                  <Link onClick={() => setIsNewAccount(false)}>Log in</Link>
+                  <Link onClick={() => this.setState({ isNewAccount: false })}>
+                    Log in
+                  </Link>
                 </Fragment>
               ) : (
                 <Fragment>
                   Don't have an account?{" "}
-                  <Link onClick={() => setIsNewAccount(true)}>Sign up</Link>
+                  <Link onClick={() => this.setState({ isNewAccount: true })}>
+                    Sign up
+                  </Link>
                 </Fragment>
               )}
             </p>
           </div>
         </div>
       </Fragment>
-    </Transition>
-  );
-};
+    );
+  }
+}
 
 export default Login;

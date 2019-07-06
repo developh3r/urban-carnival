@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Merawr",
+  "name": "Merawr: A Motivation App",
   "icons": [
     {
       "src": "favicon.ico",
@@ -10,6 +10,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#5a609a",
+  "background_color": "#5a609a"
 }

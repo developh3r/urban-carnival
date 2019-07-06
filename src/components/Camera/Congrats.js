@@ -1,4 +1,4 @@
-import React from "react";
+// import React from "react";
 
 const Congrats = () => {
   return "This is the Congrats page";
