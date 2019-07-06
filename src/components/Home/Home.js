@@ -1,6 +1,11 @@
 import React, { Component, Fragment } from "react";
+import { Link } from "react-router-dom";
+import { Container, Link as Button } from "react-floating-action-button";
+
 import TopBanner from "./TopBanner";
 import Logs from "./Logs/Logs";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const logs = [
   {
@@ -42,6 +47,13 @@ class Home extends Component {
             <Logs date={log.date} phrase={log.phrase} />
           ))}
         </div>
+        <Container>
+          <Link to="/how-are-you">
+            <Button className="is-primary">
+              <FontAwesomeIcon icon={faPlus} />
+            </Button>
+          </Link>
+        </Container>
       </Fragment>
     );
   }
