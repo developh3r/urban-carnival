@@ -182,14 +182,17 @@ class EncourageMe extends Component {
           <h1 className="is-size-3 has-text-white has-text-weight-bold has-text-centered">
             {this.state.phrase}
           </h1>
+          <h1 className="help has-text-white has-text-centered">
+            {this.state.message}
+          </h1>
         </div>
-        <div className="hero">
+        {/* <div className="hero">
           <div className="hero-body">
             <div className="has-text-centered">
               <h1 className="help has-text-white">{this.state.message}</h1>
             </div>
           </div>
-        </div>
+        </div> */}
 
         <FixedButton>
           <div className="columns">
