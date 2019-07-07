@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { Link } from "react-router-dom";
-import Confetti from "../Congrats/Confetti";
+// import Confetti from "../Congrats/Confetti";
 import FixedButton from "./FixedButton";
 import kiss from "../../assets/kiss.png";
 

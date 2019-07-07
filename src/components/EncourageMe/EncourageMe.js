@@ -2,8 +2,8 @@ import React, { Fragment, Component } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import classNames from "classnames";
-import { Container, Link as Button } from "react-floating-action-button";
-import { Redirect } from "react-router-dom";
+// import { Container, Link as Button } from "react-floating-action-button";
+// import { Redirect } from "react-router-dom";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
@@ -11,7 +11,7 @@ import { faMicrophone } from "@fortawesome/free-solid-svg-icons";
 import VideoInput from "../EncourageMe/VideoInput";
 // import Speech from "./SpeechRecognition/Speech";
 
-import styles from "./encourageMe.module.scss";
+// import styles from "./encourageMe.module.scss";
 import FixedButton from "../UIKit/FixedButton";
 
 var SpeechRecognition =
@@ -74,7 +74,6 @@ class EncourageMe extends Component {
         },
         () => {
           if (this.state.voiceInput === this.state.purePhrase) {
-            console.log(this.state.listenCount);
             return this.setState(previousState => {
               if (previousState.listenCount < 2) {
                 switch (previousState.listenCount) {
