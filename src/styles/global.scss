@@ -2,6 +2,12 @@
 // @import "../../node_modules/react-fab/dist/main.scss";
 @import "bulma";
 
+@media only screen and (max-height: 500px) {
+  .fixedButton {
+    display: none;
+  }
+}
+
 input:focus {
   outline: none !important;
 }
@@ -93,5 +99,5 @@ button.is-active {
 }
 
 .modal {
-  height: 100vh
+  height: 100vh;
 }
