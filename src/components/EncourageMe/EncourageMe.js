@@ -13,6 +13,7 @@ import VideoInput from "../EncourageMe/VideoInput";
 
 // import styles from "./encourageMe.module.scss";
 import FixedButton from "../UIKit/FixedButton";
+import styles from "./encourageMe.module.scss";
 
 var SpeechRecognition =
   window.SpeechRecognition || window.webkitSpeechRecognition;
@@ -169,13 +170,19 @@ class EncourageMe extends Component {
       <Fragment>
         <h1 className="is-size-4 has-text-centered">Hi Caye, let's do this!</h1>
         <VideoInput />
-
-        <p className="has-text-centered has-text-white mt-3">
-          Look yourself in the eye and say this out loud:
-        </p>
-        <h1 className="is-size-3 has-text-white has-text-weight-bold has-text-centered">
-          {this.state.phrase}
-        </h1>
+        <div
+          className={classNames(
+            "p-1 has-background-primary",
+            styles.cameraMessage
+          )}
+        >
+          <p className="has-text-centered has-text-white">
+            Look yourself in the eye and say this out loud:
+          </p>
+          <h1 className="is-size-3 has-text-white has-text-weight-bold has-text-centered">
+            {this.state.phrase}
+          </h1>
+        </div>
         <div className="has-text-centered">
           <h1 className="help has-text-white">{this.state.message}</h1>
         </div>
