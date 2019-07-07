@@ -22,7 +22,8 @@ class VideoInput extends Component {
       expressions: [],
       message: null,
       currentExpression: null,
-      averageExpressions: []
+      averageExpressions: [],
+      maxExpression: null
     };
   }
 
@@ -42,7 +43,11 @@ class VideoInput extends Component {
       let inputDevice = await devices.filter(
         device => device.kind === "videoinput"
       );
-      if (inputDevice.length < 2) {
+      if (inputDevice.length > 2) {
+        await this.setState({
+          facingMode: "environment"
+        });
+      } else {
         await this.setState({
           facingMode: "user"
         });
@@ -63,12 +68,18 @@ class VideoInput extends Component {
         this.webcam.current.getScreenshot(),
         inputSize
       ).then(fullDesc => {
+        const maxExpression =
+          this.state.currentExpression !== null
+            ? this.maxMinVal(this.state.currentExpression)
+            : {};
+
         fullDesc !== "undefined" && fullDesc.length > 0
           ? this.setState(
               {
                 detections: fullDesc.map(fd => fd.detection),
                 descriptors: fullDesc.map(fd => fd.descriptor),
-                currentExpression: fullDesc[0].expressions
+                currentExpression: fullDesc[0].expressions,
+                maxExpression: maxExpression
               },
               this.getExpressions
             )
@@ -99,7 +110,6 @@ class VideoInput extends Component {
           expressions.push(currentExpression);
           count++;
         }
-
         return {
           expressions: expressions
         };
@@ -107,8 +117,23 @@ class VideoInput extends Component {
     }
   };
 
+  maxMinVal = obj => {
+    const sortedEntriesByVal = Object.entries(obj).sort(
+      ([, v1], [, v2]) => v1 - v2
+    );
+
+    return {
+      min: sortedEntriesByVal[0],
+      max: sortedEntriesByVal[sortedEntriesByVal.length - 1],
+      sortedObjByVal: sortedEntriesByVal.reduce(
+        (r, [k, v]) => ({ ...r, [k]: v }),
+        {}
+      )
+    };
+  };
+
   render() {
-    const { detections, match, facingMode } = this.state;
+    const { detections, facingMode } = this.state;
     let videoConstraints = null;
     let camera;
     if (!!facingMode) {
@@ -138,10 +163,10 @@ class VideoInput extends Component {
                 transform: `translate(${_X}px,${_Y}px)`
               }}
             >
-              {!!match && !!match[i] ? (
+              {this.state.maxExpression && (
                 <h3
                   style={{
-                    backgroundColor: "blue",
+                    backgroundColor: "#2a307c",
                     border: "solid",
                     borderColor: "#2a307c",
                     width: _W,
@@ -151,9 +176,9 @@ class VideoInput extends Component {
                   }}
                   // className="has-text-centered is-size-4"
                 >
-                  {match[i]._label}
+                  {this.state.maxExpression.max}
                 </h3>
-              ) : null}
+              )}
             </div>
           </div>
         );
