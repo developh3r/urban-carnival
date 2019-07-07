@@ -5,4 +5,8 @@
   margin: 0 auto;
   width: 80%;
   justify-content: space-around;
+
+  @media only screen and (max-height: 600) {
+    display: hidden;
+  }
 }
